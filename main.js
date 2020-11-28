@@ -33,11 +33,6 @@ setInterval(function() {
         ost = 8;
     }      
 
-    console.log(num, "num");
-    console.log(range, "range");
-    console.log(ost, "ost");
-    console.log(range-ost, "range-ost")
-
     document.getElementById("block").innerHTML = `<div class="div" style="background: linear-gradient(to top, 
         green ${range-ost}%, red ${range-ost}% ${range}%, #FFF ${range}%);"></div>`;
 }, 500);
