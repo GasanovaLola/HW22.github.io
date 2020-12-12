@@ -1,25 +1,30 @@
-var tempRange = document.getElementById("range").value;
-var tempNum = document.getElementById("number").value;
+let range = document.getElementById("range");
+let number = document.getElementById("number");
+let div = document.getElementById("block");
 
-var range;
-var num;
-var ost = 0;
+let ost;
 
-setInterval(function() {
-    range = +document.getElementById("range").value;
-    num = +document.getElementById("number").value;
 
-    if (tempRange !== range) {
-        tempRange = range;
+range.addEventListener('change', (event) => {
+    number.value = event.target.value;
 
-        document.getElementById('number').value = range;
-    }
-    else if (tempNum !== num) {
-        tempNum = num;
+    ost = Commission(range.value);
+    Column(number.value);
+});
 
-        document.getElementById('range').value = num;
-    }
+number.addEventListener('input', (event) => {
+    range.value = event.target.value;
 
+    ost = Commission(range.value);
+    Column(range.value, ost);
+});
+
+function Column(range) {
+    div.innerHTML = `<div class="div" style="background: linear-gradient(to top, 
+        green ${range - ost}%, red ${range - ost}% ${range}%, #FFF ${range}%);"></div>`;
+};
+
+function Commission(range) {
     if (range < 20) {
         ost = 2;
     }
@@ -31,8 +36,7 @@ setInterval(function() {
     }
     else if (range >= 75 && range <= 100) {
         ost = 8;
-    }      
-
-    document.getElementById("block").innerHTML = `<div class="div" style="background: linear-gradient(to top, 
-        green ${range-ost}%, red ${range-ost}% ${range}%, #FFF ${range}%);"></div>`;
-}, 500);
+    } 
+    
+    return ost;
+}
